@@ -50,73 +50,22 @@
                             @else
                             
                             <li class="nav-item">
-                                <a href="/admin/user" class="nav-link">
-                                    <i class="nav-icon fa fa-users"></i>
+                                <a href="/user/absen" class="nav-link">
+                                    <i class="nav-icon fa fa-clipboard"></i>
                                     <p>
-                                        Data Karyawan
+                                        Absensi
                                     </p>
                                 </a>
                             </li>
                             
                               <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-user-tie"></i>
+                                <a href="/user/profile/" class="nav-link">
+                                    <i class="nav-icon fa fa-user"></i>
                                   <p>
-                                    Menu Direktur
-                                    <i class="fas fa-angle-left right"></i>
+                                    My Profile
                                   </p>
                                 </a>
-                                <ul class="nav nav-treeview">
-                                  <li class="nav-item">
-                                    <a href="/admin/user" class="nav-link">
-                                        <i class="nav-icon fa fa-user"></i>
-                                      <p>User</p>
-                                    </a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a href="/admin/jabatan" class="nav-link">
-                                        <i class="nav-icon fa fa-briefcase"></i>
-                                      <p>Jabatan</p>
-                                    </a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a href="/admin/penilaian" class="nav-link">
-                                        <i class="nav-icon fa fa-star-half-alt"></i>
-                                      <p>Penilaian</p>
-                                    </a>
-                                </li>
-                                </ul>
-                              </li>
-                                                       
-                            <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                  <i class="nav-icon fa fa-user-tie"></i>
-                                <p>
-                                  Menu Manager
-                                  <i class="fas fa-angle-left right"></i>
-                                </p>
-                              </a>
-                              <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                  <a href="/admin/kriteria-nilai" class="nav-link">
-                                      <i class="nav-icon fa fa-clipboard"></i>
-                                    <p>Kriteria Penilaian</p>
-                                  </a>
-                                </li>
-                                <li class="nav-item">
-                                  <a href="/admin/bobot-nilai" class="nav-link">
-                                      <i class="nav-icon fa fa-balance-scale"></i>
-                                    <p>Bobot Penilaian</p>
-                                  </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/admin/penilaian" class="nav-link">
-                                        <i class="nav-icon fa fa-star-half-alt"></i>
-                                      <p>Penilaian</p>
-                                    </a>
-                                  </li>
-                              </ul>
-                            </li>
+                              </li>                                                  
                             @endif
                             <li class="nav-item">
                                 <form action="/logout" method="POST" id="formLogout">

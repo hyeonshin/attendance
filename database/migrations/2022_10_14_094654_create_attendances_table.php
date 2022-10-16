@@ -17,10 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->date("presence_date");
+            $table->string("status")->default('Belum Hadir');
+            $table->string("keterangan")->nullable();
             $table->time("presence_enter_time");
             $table->time("presence_out_time")->nullable();
-            $table->time("presence_enter_loc");
-            $table->time("presence_out_loc")->nullable();
+            $table->string("presence_enter_loc");
+            $table->string("presence_out_loc")->nullable();
             $table->timestamps();
         });
     }

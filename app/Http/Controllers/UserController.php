@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Stevebauman\Location\Facades\Location;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -154,5 +156,14 @@ class UserController extends Controller
 
     {
         return Excel::download(new UsersExport, 'data-karyawan.xlsx');
+    }
+
+    public function index_user(){
+        // $ip = request()->ip(); // Activate this if you want to get server ip
+        
+        // dd(now()->toDateString());
+        $position = Location::get('111.94.60.43');
+        $user = User::all();
+        return view('home', ['userList' => $user, 'position' => $position]);
     }
 }
