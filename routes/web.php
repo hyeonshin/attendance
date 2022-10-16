@@ -52,5 +52,7 @@ All Admin Routes List
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::get('/admin/home', [UserController::class, 'index'])->name('admin.home');
-
+    Route::get('/admin/input', [UserController::class, 'input'])->name('admin.input');
+    Route::post('/admin/input/', [UserController::class, 'store']);
+    
 });

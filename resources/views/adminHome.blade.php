@@ -7,15 +7,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>User</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">User</li>
-            </ol>
-          </div>
+          
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -33,22 +25,28 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Data User</h3>
+                <h3 class="card-title">Data Karyawan</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" id="myTable">
                 
-                  <a href="/admin/user/input" class="btn btn-primary" style="padding-top: 10px;"><i class="fa fa-plus-circle"></i> Input Data</a>
-               
+                  <a href="/admin/input" class="btn btn-primary" style="padding-top: 10px;"><i class="fa fa-plus-circle"></i> Input Data</a>
+                  <a href="/admin/home/report" class="btn btn-success ml-2" style="padding-top: 10px;"><i class="fa fa-file-export"></i> Export Data</a>
+                  <div class="input-group rounded mt-2">
+                    <input type="search" name="search_text" id="myInput" onkeyup="myFunction()"  class="form-control rounded" placeholder="Search Data" aria-label="Search" aria-describedby="search-addon" />
+                    <span class="input-group-text border-0" id="search-addon">
+                      <i class="fa fa-search"></i>
+                    </span>
+                  </div>
                   <thead>
                   <tr>
-                    <th>No.</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    
-                    <th>Action</th>
+                    <th scope="col">No.</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Status</th>                    
+                    <th >Action</th>
                     
                   </tr>
                   </thead>
@@ -56,16 +54,18 @@
                   @foreach($userList as $data)
                   @if($data->is_active == 'Yes')
                   <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td class="col-sm-3">{{ $data->name }}</td>
-                    <td class="col-sm-2">{{ $data->email }}</td>
-                    <td class="col-sm-2">{{ $data->phone }}</td>
+                    <td scope="row">{{ $loop->iteration }}</td>
+                    <td class="col-sm-3" scope="row">{{ $data->name }} </td>
+                    <td class="col-sm-3" scope="row">{{ $data->email }}</td>
+                    <td class="col-sm-2" scope="row">{{ $data->phone }}</td>
+                    <td class="col-sm-1" scope="row">{{ $data->type }}</td>
 
                     
-                    <td>
-                        <a href="/admin/user/detail/{{ $data->id }}" type="button" class="btn btn-primary">Detail Data</a>
-                        <a href="/admin/user/edit/{{ $data->id }}" type="button" class="btn btn-success">Edit Data</a>
-                        <a href="/admin/user/delete/{{ $data->id }}" type="button" class="btn btn-danger">Hapus Data</a>
+                    <td class="col-sm-2">
+                        <a href="/admin/user/edit/{{ $data->id }}" type="button" class="btn btn-success"><i class="fa fa-pen"></i></a>
+                        <a href="/admin/user/deactive/{{ $data->id }}" type="button" class="btn btn-primary">Deactivate</a>
+                        
+                        {{-- <a href="/admin/user/delete/{{ $data->id }}" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></a> --}}
                     </td>
                     
                   </tr>
@@ -78,7 +78,7 @@
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    
+                    <th>Status</th>
                     <th>Action</th>
                     
                   </tr>
@@ -102,5 +102,35 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
+  <script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, td1, td2, td3, td4, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+    
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        td1 = tr[i].getElementsByTagName("td")[1];
+        td2 = tr[i].getElementsByTagName("td")[2];
+        td3 = tr[i].getElementsByTagName("td")[3];
+        td4 = tr[i].getElementsByTagName("td")[4];
+        if (td && td1 && td2 && td3 && td4) {
+          txtValue = td.textContent || td.innerText;
+          txtValue1 = td1.textContent || td1.innerText;
+          txtValue2 = td2.textContent || td2.innerText;
+          txtValue3 = td3.textContent || td3.innerText;
+          txtValue4 = td4.textContent || td4.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    </script>
 @endsection
