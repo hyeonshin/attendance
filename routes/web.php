@@ -54,5 +54,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/home', [UserController::class, 'index'])->name('admin.home');
     Route::get('/admin/input', [UserController::class, 'input'])->name('admin.input');
     Route::post('/admin/input/', [UserController::class, 'store']);
+    Route::get('/admin/edit/{id}', [UserController::class, 'edit']);
+    Route::put('/admin/edit/{id}', [UserController::class, 'update']);
+    Route::get('/admin/change/{id}', [UserController::class, 'change']);
+    Route::put('/admin/change/{id}', [UserController::class, 'update_2']);
+    Route::get('/admin/activate/{id}', [UserController::class, 'activate']);
+    Route::get('/admin/deactive/{id}', [UserController::class, 'deactive']);
+    Route::get('/admin/delete/{id}', [UserController::class, 'destroy']);
+    Route::get('/admin/export', [UserController::class, 'export'])->name('admin.export');
     
 });

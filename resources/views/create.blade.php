@@ -45,9 +45,7 @@
                     <label for="InputPassword">Password</label>
                     <input type="password" name="password" class="form-control" id="InputPassword" placeholder="Enter Password">
                     <label for="InputTelp">Phone</label>
-                    <div class="input-group-prepend">
-                        <input type="text" name="phone" class="form-control" id="InputTelp" placeholder="Enter Phone Number">
-                    </div>
+                    <input type="text" name="phone" class="form-control" id="InputTelp" placeholder="Enter Phone Number">
                     <div class="form-group">
                       <label for="Position">Position</label>
                       <select class="form-control" id="Position" name="position">

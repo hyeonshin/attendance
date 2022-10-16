@@ -7,7 +7,7 @@
             <!-- Brand Logo -->
             <a href="/admin" class="brand-link">
                 <img src="/lte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">SPK TIKI</span>
+                <span class="brand-text font-weight-light">Attendance App</span>
             </a>
 
             <!-- Sidebar -->
@@ -18,8 +18,10 @@
                         <img src="/lte/dist/img/user.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">#</a>
-                        <span class="text-muted">#</span>
+                        <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                        <span class="text-muted">
+                          {{ Auth::user()->type }}
+                        </span>
                     </div>
                 </div>
 
@@ -28,14 +30,25 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                             with font-awesome or any other icon font library -->
+                            @if( Auth::user()->type == 'admin' )
                             <li class="nav-item">
-                                <a href="/admin" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <a href="/admin/home" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
                                     <p>
-                                        Dashboard
+                                        Data Karyawan
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="/admin/attendance" class="nav-link">
+                                    <i class="nav-icon fas fa-clipboard"></i>
+                                    <p>
+                                       Data Absen
+                                    </p>
+                                </a>
+                            </li>
+                            @else
+                            
                             <li class="nav-item">
                                 <a href="/admin/user" class="nav-link">
                                     <i class="nav-icon fa fa-users"></i>
@@ -104,7 +117,7 @@
                                   </li>
                               </ul>
                             </li>
-
+                            @endif
                             <li class="nav-item">
                                 <form action="/logout" method="POST" id="formLogout">
                                     @csrf

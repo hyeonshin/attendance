@@ -13,8 +13,11 @@
     </section>
 
     @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ session('status') }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     @endif
 
@@ -32,7 +35,7 @@
                 <table class="table table-bordered table-hover" id="myTable">
                 
                   <a href="/admin/input" class="btn btn-primary" style="padding-top: 10px;"><i class="fa fa-plus-circle"></i> Input Data</a>
-                  <a href="/admin/home/report" class="btn btn-success ml-2" style="padding-top: 10px;"><i class="fa fa-file-export"></i> Export Data</a>
+                  <a href="/admin/export" class="btn btn-success ml-2" style="padding-top: 10px;"><i class="fa fa-file-export"></i> Export Data</a>
                   <div class="input-group rounded mt-2">
                     <input type="search" name="search_text" id="myInput" onkeyup="myFunction()"  class="form-control rounded" placeholder="Search Data" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
@@ -52,7 +55,7 @@
                   </thead>
                   <tbody>
                   @foreach($userList as $data)
-                  @if($data->is_active == 'Yes')
+                  
                   <tr>
                     <td scope="row">{{ $loop->iteration }}</td>
                     <td class="col-sm-3" scope="row">{{ $data->name }} </td>
@@ -61,15 +64,17 @@
                     <td class="col-sm-1" scope="row">{{ $data->type }}</td>
 
                     
-                    <td class="col-sm-2">
-                        <a href="/admin/user/edit/{{ $data->id }}" type="button" class="btn btn-success"><i class="fa fa-pen"></i></a>
-                        <a href="/admin/user/deactive/{{ $data->id }}" type="button" class="btn btn-primary">Deactivate</a>
-                        
-                        {{-- <a href="/admin/user/delete/{{ $data->id }}" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></a> --}}
-                    </td>
-                    
+                    <td class="col-sm-3">
+                        <a href="/admin/edit/{{ $data->id }}" type="button" class="btn btn-success"><i class="fa fa-pen"></i></a>
+                        <a href="/admin/change/{{ $data->id }}" type="button" class="btn btn-warning" onclick="return confirm('Are you sure want to change password?')"><i class="fa fa-key"></i></a>
+                        @if($data->is_active == 'No')
+                        <a href="/admin/activate/{{ $data->id }}" type="button" class="btn btn-secondary" onclick="return confirm('Are you sure want to activate this account?')">Activate</a>
+                        <a href="/admin/delete/{{ $data->id }}" type="button" class="btn btn-danger" onclick="return confirm('Are you sure want to delete this account?')"><i class="fa fa-trash"></i></a>
+                        @else
+                        <a href="/admin/deactive/{{ $data->id }}" type="button" class="btn btn-primary" onclick="return confirm('Are you sure want to deactive this account?')">Deactivate</a>
+                        @endif
+                    </td>                    
                   </tr>
-                  @endif
                   @endforeach
                   </tbody>
                   <tfoot>
