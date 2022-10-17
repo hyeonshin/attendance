@@ -99,7 +99,7 @@ class UserController extends Controller
 
         $user = User::where('id', $id)->first();
         $user->update([
-            'password' => bcrypt($request->input('name')),
+            'password' => bcrypt($request->input('password')),
         ]);
 
         if($user){
