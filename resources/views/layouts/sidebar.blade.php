@@ -18,7 +18,7 @@
                         <img src="/lte/dist/img/user.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                        <a href="./profile" class="d-block">{{ Auth::user()->name }}</a>
                         <span class="text-muted">
                           {{ Auth::user()->type }}
                         </span>
@@ -50,7 +50,7 @@
                             @else
                             
                             <li class="nav-item">
-                                <a href="/user/absen" class="nav-link">
+                                <a href="/user/home" class="nav-link">
                                     <i class="nav-icon fa fa-clipboard"></i>
                                     <p>
                                         Absensi

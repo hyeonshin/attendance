@@ -169,4 +169,10 @@ class UserController extends Controller
         $att = Attendance::where('presence_date', today()->toDateString())->where('user_id', '=', $user_id)->first();
         return view('home', ['userProfile' => $user, 'attendance' => $att, 'position' => $position]);
     }
+
+    public function profile(){
+        $user_id = auth()->user()->id;
+        $user = User::where('id', $user_id)->first();
+        return view('profile', ['userProfile' => $user]);
+    }
 }

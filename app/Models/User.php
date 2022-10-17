@@ -66,8 +66,7 @@ class User extends Authenticatable
 
     }
 
-    public function attendance()
-    {
-        return $this->belongsTo(Attendance::class);
+    public function attendance() {
+        return $this->hasMany(Attendance::class);
     }
 }

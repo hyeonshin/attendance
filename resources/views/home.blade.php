@@ -38,16 +38,17 @@
                 <p> Status : <span class="badge bg-danger">Tidak Hadir</span> </p>
                 <a href="/user/hadir" class="btn btn-primary col-12" style="padding-top: 10px;"><i class="fa fa-check"></i> Hadir</a>
                 <a href="/user/izin" class="btn btn-outline-danger col-12 mt-2" style="padding-top: 10px;"><i class="fa fa-times"></i> Izin</a>
-                @elseif($attendance->presence_date == now()->toDateString() && $attendance->status == "Hadir")
+                @elseif($attendance->presence_date == now()->toDateString() && $attendance->status == "Hadir" && $attendance->keterangan == NULL)
                 <p> Status : <span class="badge bg-primary">Hadir</span> </p>
-                <a href="/user/hadir" class="btn btn-warning col-12" style="padding-top: 10px;"><i class="fa fa-check"></i> Pulang</a>
+                <a href="/user/pulang" class="btn btn-warning col-12" style="padding-top: 10px;"><i class="fa fa-check-circle"></i> Pulang</a>
                 @elseif($attendance->presence_date == now()->toDateString() && $attendance->status == "Izin")
-                <div class="alert alert-warning" role="alert">
+                <p> Status : <span class="badge bg-warning">Izin</span> </p>
+                <div class="alert alert-primary" role="alert">
                   Anda sudah mengajukan izin.
                 </div>
                 @else
-                <p> Status : <span class="badge bg-primary">Hadir</span> </p><span class="badge bg-success">Sudah Pulang</span>
-                <div class="alert alert-warning" role="alert">
+                <p> Status : <span class="badge bg-primary ">Hadir</span> <span class="badge bg-success">Sudah Pulang</span></p>
+                <div class="alert alert-success" role="alert">
                   <p>Terima kasih atas kontribusi anda hari ini. Selamat beristirahat :) </p>
                 </div>
                 @endif
