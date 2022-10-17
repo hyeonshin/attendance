@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Exports\UsersExport;
+use App\Models\Attendance;
 use Maatwebsite\Excel\Facades\Excel;
 use Stevebauman\Location\Facades\Location;
 use Carbon\Carbon;
@@ -163,7 +164,9 @@ class UserController extends Controller
         
         // dd(now()->toDateString());
         $position = Location::get('111.94.60.43');
-        $user = User::all();
-        return view('home', ['userList' => $user, 'position' => $position]);
+        $user_id = auth()->user()->id;
+        $user = User::where('id', $user_id)->first();
+        $att = Attendance::where('presence_date', today()->toDateString())->where('user_id', '=', $user_id)->first();
+        return view('home', ['userProfile' => $user, 'attendance' => $att, 'position' => $position]);
     }
 }

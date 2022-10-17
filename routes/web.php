@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -34,7 +35,8 @@ All Normal Users Routes List
 
 Route::middleware(['auth', 'user-access:karyawan'])->group(function () {
 
-    Route::get('/home', [UserController::class, 'index_user'])->name('home');
+    Route::get('/user/home', [UserController::class, 'index_user'])->name('home');
+    Route::get('/user/hadir', [AttendanceController::class, 'hadir'])->name('home.hadir');
 
 });
 

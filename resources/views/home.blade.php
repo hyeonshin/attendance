@@ -33,9 +33,25 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <p> Today : <strong> {{ now()->toFormattedDateString() }} </strong> </p>
+                <p> Current Loc : <strong>{{ $position->cityName }} </strong></p>
+                @if($attendance == null)
                 <p> Status : <span class="badge bg-danger">Tidak Hadir</span> </p>
-                <button type="submit" class="btn btn-primary col-12">Hadir</button>
-                Loc : {{ $position->cityName }}
+                <a href="/user/hadir" class="btn btn-primary col-12" style="padding-top: 10px;"><i class="fa fa-check"></i> Hadir</a>
+                <a href="/user/izin" class="btn btn-outline-danger col-12 mt-2" style="padding-top: 10px;"><i class="fa fa-times"></i> Izin</a>
+                @elseif($attendance->presence_date == now()->toDateString() && $attendance->status == "Hadir")
+                <p> Status : <span class="badge bg-primary">Hadir</span> </p>
+                <a href="/user/hadir" class="btn btn-warning col-12" style="padding-top: 10px;"><i class="fa fa-check"></i> Pulang</a>
+                @elseif($attendance->presence_date == now()->toDateString() && $attendance->status == "Izin")
+                <div class="alert alert-warning" role="alert">
+                  Anda sudah mengajukan izin.
+                </div>
+                @else
+                <p> Status : <span class="badge bg-primary">Hadir</span> </p><span class="badge bg-success">Sudah Pulang</span>
+                <div class="alert alert-warning" role="alert">
+                  <p>Terima kasih atas kontribusi anda hari ini. Selamat beristirahat :) </p>
+                </div>
+                @endif
+                
               </div>
               <!-- /.card-body -->
             </div>
